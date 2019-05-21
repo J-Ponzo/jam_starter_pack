@@ -1,9 +1,15 @@
 [Ll]ibrary/
 [Tt]emp/
 [Oo]bj/
-[Bb]uild/
-[Bb]uilds/
 Assets/AssetStoreTools*
+
+#Build folder
+_Build/*
+!_Build/notsync*
+
+#_WIP folder
+Assets/_WIP/*
+!Assets/_WIP/notsync*
 
 # Visual Studio cache directory
 .vs/
