@@ -4,10 +4,5 @@ using UnityEngine;
 
 public class OptionsManager : Singleton<OptionsManager>
 {
-    protected OptionsManager() { DontDestroyOnLoad(gameObject); }
-
-    public void DEBUGFoo()
-    {
-
-    }
+    protected OptionsManager() { }
 }

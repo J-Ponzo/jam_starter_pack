@@ -4,10 +4,5 @@ using UnityEngine;
 
 public class NavigationManager : Singleton<NavigationManager>
 {
-    protected NavigationManager() { DontDestroyOnLoad(gameObject); }
-
-    public void DEBUGFoo()
-    {
-
-    }
+    protected NavigationManager() {}
 }

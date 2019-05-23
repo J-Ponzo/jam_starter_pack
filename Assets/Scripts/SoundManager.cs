@@ -5,9 +5,4 @@ using UnityEngine;
 public class SoundManager : Singleton<SoundManager>
 {
     protected SoundManager() { }
-
-    public void DEBUGFoo()
-    {
-
-    }
 }

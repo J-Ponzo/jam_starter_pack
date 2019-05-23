@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 {
+    // Check to see if we're about to be destroyed.
+    private static bool m_ShuttingDown = false;
     private static object m_Lock = new object();
     private static T m_Instance;
+
+    public bool dontDestroyOnLoad;
 
     /// <summary>
     /// Access singleton instance through this propriety.
@@ -14,6 +18,13 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     {
         get
         {
+            if (m_ShuttingDown)
+            {
+                Debug.LogWarning("[Singleton] Instance '" + typeof(T) +
+                    "' already destroyed. Returning null.");
+                return null;
+            }
+
             lock (m_Lock)
             {
                 if (m_Instance == null)
@@ -34,5 +45,28 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
                 return m_Instance;
             }
         }
+    }
+
+    private void Awake()
+    {
+        T realInstance = Instance;
+
+        if (this != realInstance) {
+            Debug.LogWarning("Multiple instances of " + typeof(T).ToString() + " (Singleton) has been detected. This one will be destroyed.");
+            Destroy(this.gameObject);
+        }
+
+        if (dontDestroyOnLoad) DontDestroyOnLoad(gameObject);
+    }
+
+    private void OnApplicationQuit()
+    {
+        m_ShuttingDown = true;
+    }
+
+
+    private void OnDestroy()
+    {
+        m_ShuttingDown = true;
     }
 }
