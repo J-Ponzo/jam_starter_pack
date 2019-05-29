@@ -21,6 +21,37 @@ public class InputManager : Singleton<InputManager>
     }
 
     private KeyCode[] validKeyCodes = (KeyCode[]) Enum.GetValues(typeof(KeyCode));
+    private string[] validAxis =
+    {
+        "XAxis",
+        "YAxis",
+        "3Axis",
+        "4Axis",
+        "5Axis",
+        "6Axis",
+        "7Axis",
+        "8Axis",
+        "9Axis",
+        "10Axis",
+        "11Axis",
+        "12Axis",
+        "13Axis",
+        "14Axis",
+        "15Axis",
+        "16Axis",
+        "17Axis",
+        "18Axis",
+        "19Axis",
+        "20Axis",
+        "21Axis",
+        "22Axis",
+        "23Axis",
+        "24Axis",
+        "25Axis",
+        "26Axis",
+        "27Axis",
+        "28Axis"
+    };
 
     private Dictionary<AKey, KeyCode> keyBindings = new Dictionary<AKey, KeyCode>();
     private Dictionary<AAxis, string> axisBindings = new Dictionary<AAxis, string>();
@@ -37,6 +68,11 @@ public class InputManager : Singleton<InputManager>
         if (code != KeyCode.None)
         {
             Debug.Log(code);
+        }
+        string axis = GetCurrentAxis();
+        if (axis != null)
+        {
+            Debug.Log(axis);
         }
     }
 
@@ -84,6 +120,19 @@ public class InputManager : Singleton<InputManager>
     public bool GetKey(AKey aKey)
     {
         return Input.GetKey(keyBindings[aKey]);
+    }
+
+    private string GetCurrentAxis()
+    {
+
+        foreach (string axis in validAxis)
+        {
+            if (Mathf.Abs(Input.GetAxis(axis)) > 0.75f)
+            {
+                return axis;
+            }
+        }
+        return null;
     }
 
     private  KeyCode GetCurrentKey()
