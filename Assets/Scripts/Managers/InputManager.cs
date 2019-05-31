@@ -58,22 +58,7 @@ public class InputManager : Singleton<InputManager>
 
     private void Start()
     {
-
         LoadBindings();
-    }
-
-    private void Update()
-    {
-        KeyCode code = GetCurrentKey();
-        if (code != KeyCode.None)
-        {
-            Debug.Log(code);
-        }
-        string axis = GetCurrentAxis();
-        if (axis != null)
-        {
-            Debug.Log(axis);
-        }
     }
 
     private void LoadBindings()
